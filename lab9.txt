@@ -24,10 +24,11 @@ C:\Users\artak>aws ecs create-cluster --cluster-name Artur-cluster
     }
 }
 
+
 C:\Users\artak>aws ecs register-task-definition --cli-input-json file://fargate-task.json
 {
     "taskDefinition": {
-        "taskDefinitionArn": "arn:aws:ecs:us-east-1:810661096819:task-definition/sample-fargate:1",
+        "taskDefinitionArn": "arn:aws:ecs:us-east-1:810661096819:task-definition/sample-fargate:2",
         "containerDefinitions": [
             {
                 "name": "fargate-app",
@@ -55,7 +56,7 @@ C:\Users\artak>aws ecs register-task-definition --cli-input-json file://fargate-
         ],
         "family": "sample-fargate",
         "networkMode": "awsvpc",
-        "revision": 1,
+        "revision": 2,
         "volumes": [],
         "status": "ACTIVE",
         "requiresAttributes": [
@@ -85,19 +86,16 @@ C:\Users\artak>
 C:\Users\artak>
 C:\Users\artak>
 C:\Users\artak>
-C:\Users\artak>
-C:\Users\artak>
-C:\Users\artak>
-C:\Users\artak>
-C:\Users\artak>
 C:\Users\artak>aws ecs list-task-definitions
 {
     "taskDefinitionArns": [
-        "arn:aws:ecs:us-east-1:810661096819:task-definition/sample-fargate:1"
+        "arn:aws:ecs:us-east-1:810661096819:task-definition/sample-fargate:1",
+        "arn:aws:ecs:us-east-1:810661096819:task-definition/sample-fargate:2"
     ]
 }
 
-C:\Users\artak>aws ecs create-service --cluster Artur-cluster --service-name Artur-service --task-definition sample-fargate:1 --desired-count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-4bc6462d],securityGroups=[sg-8e89eeba],assignPublicIp=ENABLED}"
+
+C:\Users\artak>aws ecs create-service --cluster Artur-cluster --service-name Artur-service --task-definition sample-fargate:1 --desired-count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-0fa54c5587d8e5f52],securityGroups=[sg-07941562c609999e3],assignPublicIp=ENABLED}"
 {
     "service": {
         "serviceArn": "arn:aws:ecs:us-east-1:810661096819:service/Artur-cluster/Artur-service",
@@ -118,23 +116,23 @@ C:\Users\artak>aws ecs create-service --cluster Artur-cluster --service-name Art
         },
         "deployments": [
             {
-                "id": "ecs-svc/6473495782838456166",
+                "id": "ecs-svc/7157663186131415782",
                 "status": "PRIMARY",
                 "taskDefinition": "arn:aws:ecs:us-east-1:810661096819:task-definition/sample-fargate:1",
                 "desiredCount": 1,
                 "pendingCount": 0,
                 "runningCount": 0,
-                "createdAt": "2020-12-12T12:31:29.255000+02:00",
-                "updatedAt": "2020-12-12T12:31:29.255000+02:00",
+                "createdAt": "2020-12-12T13:15:27.800000+02:00",
+                "updatedAt": "2020-12-12T13:15:27.800000+02:00",
                 "launchType": "FARGATE",
                 "platformVersion": "1.3.0",
                 "networkConfiguration": {
                     "awsvpcConfiguration": {
                         "subnets": [
-                            "subnet-4bc6462d"
+                            "subnet-0fa54c5587d8e5f52"
                         ],
                         "securityGroups": [
-                            "sg-8e89eeba"
+                            "sg-07941562c609999e3"
                         ],
                         "assignPublicIp": "ENABLED"
                     }
@@ -143,16 +141,16 @@ C:\Users\artak>aws ecs create-service --cluster Artur-cluster --service-name Art
         ],
         "roleArn": "arn:aws:iam::810661096819:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
         "events": [],
-        "createdAt": "2020-12-12T12:31:29.255000+02:00",
+        "createdAt": "2020-12-12T13:15:27.800000+02:00",
         "placementConstraints": [],
         "placementStrategy": [],
         "networkConfiguration": {
             "awsvpcConfiguration": {
                 "subnets": [
-                    "subnet-4bc6462d"
+                    "subnet-0fa54c5587d8e5f52"
                 ],
                 "securityGroups": [
-                    "sg-8e89eeba"
+                    "sg-07941562c609999e3"
                 ],
                 "assignPublicIp": "ENABLED"
             }
@@ -164,6 +162,9 @@ C:\Users\artak>aws ecs create-service --cluster Artur-cluster --service-name Art
     }
 }
 
+
+C:\Users\artak>
+C:\Users\artak>
 C:\Users\artak>aws ecs list-services --cluster Artur-cluster
 {
     "serviceArns": [
@@ -183,8 +184,8 @@ C:\Users\artak>aws ecs describe-services --cluster Artur-cluster --services Artu
             "serviceRegistries": [],
             "status": "ACTIVE",
             "desiredCount": 1,
-            "runningCount": 1,
-            "pendingCount": 0,
+            "runningCount": 0,
+            "pendingCount": 1,
             "launchType": "FARGATE",
             "platformVersion": "LATEST",
             "taskDefinition": "arn:aws:ecs:us-east-1:810661096819:task-definition/sample-fargate:1",
@@ -194,23 +195,23 @@ C:\Users\artak>aws ecs describe-services --cluster Artur-cluster --services Artu
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/6473495782838456166",
+                    "id": "ecs-svc/7157663186131415782",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:us-east-1:810661096819:task-definition/sample-fargate:1",
                     "desiredCount": 1,
-                    "pendingCount": 0,
-                    "runningCount": 1,
-                    "createdAt": "2020-12-12T12:31:29.255000+02:00",
-                    "updatedAt": "2020-12-12T12:31:29.255000+02:00",
+                    "pendingCount": 1,
+                    "runningCount": 0,
+                    "createdAt": "2020-12-12T13:15:27.800000+02:00",
+                    "updatedAt": "2020-12-12T13:15:27.800000+02:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.3.0",
                     "networkConfiguration": {
                         "awsvpcConfiguration": {
                             "subnets": [
-                                "subnet-4bc6462d"
+                                "subnet-0fa54c5587d8e5f52"
                             ],
                             "securityGroups": [
-                                "sg-8e89eeba"
+                                "sg-07941562c609999e3"
                             ],
                             "assignPublicIp": "ENABLED"
                         }
@@ -220,21 +221,21 @@ C:\Users\artak>aws ecs describe-services --cluster Artur-cluster --services Artu
             "roleArn": "arn:aws:iam::810661096819:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
                 {
-                    "id": "e4650fe7-28f7-473b-af1c-6186da606c1e",
-                    "createdAt": "2020-12-12T12:31:36.083000+02:00",
-                    "message": "(service Artur-service) has started 1 tasks: (task fd2a5b9930ed4cde90b28b703e6b707e)."
+                    "id": "bd1e162b-6abf-498e-8963-17e0ba776d7f",
+                    "createdAt": "2020-12-12T13:15:30.107000+02:00",
+                    "message": "(service Artur-service) has started 1 tasks: (task 2baaad2c910c4bb4bacf3cd8e2874e68)."
                 }
             ],
-            "createdAt": "2020-12-12T12:31:29.255000+02:00",
+            "createdAt": "2020-12-12T13:15:27.800000+02:00",
             "placementConstraints": [],
             "placementStrategy": [],
             "networkConfiguration": {
                 "awsvpcConfiguration": {
                     "subnets": [
-                        "subnet-4bc6462d"
+                        "subnet-0fa54c5587d8e5f52"
                     ],
                     "securityGroups": [
-                        "sg-8e89eeba"
+                        "sg-07941562c609999e3"
                     ],
                     "assignPublicIp": "ENABLED"
                 }
@@ -247,3 +248,9 @@ C:\Users\artak>aws ecs describe-services --cluster Artur-cluster --services Artu
     ],
     "failures": []
 }
+
+
+C:\Users\artak>
+C:\Users\artak>
+C:\Users\artak>
+C:\Users\artak>
